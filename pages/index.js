@@ -1,10 +1,13 @@
 import { getFeaturedEvents } from "../helpers/api-util";
 import EventList from "../components/events/EventList";
+import NewsletterRegistration from "../components/input/newsletter-registration";
 
 function HomePage(props) {
+  if (!props.events[1]) return <div>...loading events... </div>;
   return (
     <div>
-      <EventList items={props.featured} />
+      <NewsletterRegistration />
+      <EventList items={props.events} />
     </div>
   );
 }
@@ -15,9 +18,10 @@ export async function getStaticProps() {
 
   return {
     props: {
-      featured: featuredEvents,
+      events: featuredEvents,
     },
     revalidate: 1800,
+    //every 30min re-gen page w/ new request
   };
 }
 

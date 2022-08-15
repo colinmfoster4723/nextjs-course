@@ -25,8 +25,10 @@ function AllEventsPage(props) {
 //use fragment if there is no need for div or if import react components///
 
 export async function getStaticProps() {
-  const allEvents = await getAllEvents();
+  //1) await fetch all events
+  const allEvents = getAllEvents();
 
+  //2) return props
   return {
     props: {
       events: allEvents,

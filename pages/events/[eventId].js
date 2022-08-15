@@ -1,21 +1,22 @@
 import { Fragment } from "react";
-import { getEventById, getAllEvents } from "../../helpers/api-util";
+import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 import ErrorAlert from "../../components/ui/ErrorAlert";
+import Comments from "../../components/input/comments";
 
 function EventDetailPage(props) {
   const event = props.selectedEvent;
   //get event from props, pre-rendered in getStaticProps
 
-  // if (!event) {
-  //   return (
-  //     <ErrorAlert>
-  //       <p>No event found! 🙃</p>
-  //     </ErrorAlert>
-  //   );
-  // }
+  if (!event) {
+    return (
+      <div className="center">
+        <h1> Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <Fragment>
@@ -29,6 +30,7 @@ function EventDetailPage(props) {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   );
 }
@@ -57,7 +59,7 @@ export async function getStaticProps(context) {
 }
 ///TELL NEXT JS WHICH PATHS TO EXPECT FROM DYNAMIC PAGE///
 export async function getStaticPaths() {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
 
   const paths = events.map((event) => ({
     params: { eventId: event.id },
