@@ -1,9 +1,19 @@
+import Head from "next/head";
+
 import AllPosts from "../../components/posts/AllPosts";
 import { DUMMY_POSTS } from "../../DUMMY.JS";
 import { getAllPosts } from "../../lib/posts-util";
 
 function allPostsPage(props) {
-  return <AllPosts posts={props.posts} />;
+  return (
+    <>
+      <Head>
+        <title>All Posts</title>
+        <meta name="description" content="A list of all blog posts" />
+      </Head>
+      <AllPosts posts={props.posts} />
+    </>
+  );
 }
 
 export function getStaticProps() {
