@@ -1,5 +1,5 @@
 import ContactForm from "../components/contact/ContactForm";
-
+import Head from "next/head";
 function ContactPage() {
   return (
     <>

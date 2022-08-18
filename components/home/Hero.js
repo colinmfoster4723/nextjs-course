@@ -11,7 +11,7 @@ function Hero() {
           height={300}
         />
       </div>
-      <h1>Hi, I'm Colin</h1>
+      <h1>{"Hi I'm Colin"}</h1>
       <p>I blog about web development </p>
     </section>
   );
